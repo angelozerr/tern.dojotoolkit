@@ -1,0 +1,21 @@
+{
+  "name": "tern.dojo",
+  "license": "MIT",
+  "version": "0.1.0",
+  "author": "Angelo ZERR <angelo.zerr@gmail.com>",
+  "description": "Generates dojo Tern plugin from sources by using dojo api.json",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/angelozerr/tern.dojoc.git"
+  },
+  "scripts": {
+    "test": "node ./test/run.js"
+  },
+  "dependencies": {
+    "tern": ">=0.5.0",
+    "acorn": "~0.5.0"
+  },
+  "devDependencies": { 
+  	"test": ">=0.0.5" 
+  }
+}

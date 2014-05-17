@@ -1,0 +1,22 @@
+<html>
+
+<head>
+<title>Dojo 1.6 2 Tern</title>
+<script type="text/javascript" src="../api/1.6/api.json.js"></script>
+<script type="text/javascript" src="../lib/tern-dojoapi.js"></script>
+<script type="text/javascript">
+  function dojo2Tern() {
+    var dojoApi = dojoApi_16; 
+    var ternDef = TernDojoApi.generate(dojoApi);
+    document.getElementById('ternDef').value = JSON.stringify(ternDef, null,
+        ' ');
+  }
+</script>
+</head>
+<body onload="dojo2Tern();">
+	<select>
+		<option value="">1.6</option>
+	</select>
+	<textarea id="ternDef" style="width: 100%; height: 100%"></textarea>
+</body>
+</html>
