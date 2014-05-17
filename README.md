@@ -1,7 +1,7 @@
-tern.dojo
+tern.dojotoolkit
 ===========
 
-[![Build Status](https://secure.travis-ci.org/angelozerr/tern.dojo.png)](http://travis-ci.org/angelozerr/tern.dojo)
+[![Build Status](https://secure.travis-ci.org/angelozerr/tern.dojotoolkit.png)](http://travis-ci.org/angelozerr/tern.dojotoolkit)
 
 Generates [Tern plugin](http://ternjs.net/doc/manual.html#plugins) for dojo from their Javascript sources by using api.json.
 
