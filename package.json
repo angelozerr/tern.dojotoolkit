@@ -1,12 +1,12 @@
 {
-  "name": "tern.dojo",
+  "name": "tern.dojotoolkit",
   "license": "MIT",
   "version": "0.1.0",
   "author": "Angelo ZERR <angelo.zerr@gmail.com>",
-  "description": "Generates dojo Tern plugin from sources by using dojo api.json",
+  "description": "Generates Dojo Toolkit Tern plugin from sources by using dojo api.json",
   "repository": {
     "type": "git",
-    "url": "git://github.com/angelozerr/tern.dojoc.git"
+    "url": "git://github.com/angelozerr/tern.dojotoolkit.git"
   },
   "scripts": {
     "test": "node ./test/run.js"
