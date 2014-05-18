@@ -7,7 +7,7 @@
 })(function(infer, tern) {
   "use strict";
 
-  tern.registerPlugin("dojo", function(server, options) {
+  tern.registerPlugin("dojotoolkit_1_6", function(server, options) {
     server._dojo = {};
     return {
       defs : defs
