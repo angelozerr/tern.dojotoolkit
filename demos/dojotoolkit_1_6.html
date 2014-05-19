@@ -60,8 +60,11 @@
   <body>
     
     <h1>Demo with Dojo 1.6 Tern plugin </h1>
-	<p>See <a href="https://github.com/angelozerr/tern.dojo">https://github.com/angelozerr/tern.dojo</a> for more infos.</p>  
-    <form><textarea id="code" name="code">dojo.
+	<p>See <a href="https://github.com/angelozerr/tern.dojotoolkit">https://github.com/angelozerr/tern.dojotoolkit</a> for more infos.</p>  
+    <form><textarea id="code" name="code">var elt = dojo.byId('x');
+elt.
+var w = dijit.byId('x');
+w.
 </textarea></form>
     <script type="text/javascript">
        
@@ -96,7 +99,7 @@
         },
         gutters: ["CodeMirror-linenumbers"],
     	textHover: {delay:300},
-    	ternWith: { plugins: {"dojo" : "../dojo"}}
+    	ternWith: { plugins: {"dojotoolkit_1_6" : "../dojotoolkit_1_6"}, defs:["browser"]}
       });
     </script>
     
