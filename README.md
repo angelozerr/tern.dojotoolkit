@@ -12,9 +12,7 @@ You can see demo :
  
 ## How it works? 
 
-Today tern def generation is done at hand. It should be very cool if grunt tasks will exists. 
-
-Any contributions are welcome!
+TODO explain grunt.
 
 ## Structure
 
@@ -22,7 +20,6 @@ The basic structure of the project is given in the following way:
 
 * `api/` api.json of dojo.
 * `demos/` demos with dojo tern plugin which use CodeMirror.
-* `html/` generates dojo from api.json by using HTML pages.
-* `lib/` lib to  transform dojo api.json to tern def.
+* `generator/` lib to  transform dojo api.json to tern def, generates dojo from api.json by using HTML pages.
 * `plugin/` dojo tern plugin where defs was generated with lib dojo tern plugin. 
 * `test/` contains test of dojo tern plugin.
