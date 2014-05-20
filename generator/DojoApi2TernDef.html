@@ -3,11 +3,11 @@
 <head>
 <title>Dojo 1.6 2 Tern</title>
 <script type="text/javascript" src="../api/1.6/api.json.js"></script>
-<script type="text/javascript" src="../lib/tern-dojoapi.js"></script>
+<script type="text/javascript" src="DojoApi2TernDef.js"></script>
 <script type="text/javascript">
   function dojo2Tern() {
     var dojoApi = dojoApi_16; 
-    var ternDef = TernDojoApi.generate(dojoApi);
+    var ternDef = DojoApi2TernDef.generate(dojoApi);
     document.getElementById('ternDef').value = JSON.stringify(ternDef, null,
         ' ');
   }

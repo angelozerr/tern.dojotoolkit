@@ -1,8 +1,11 @@
-var TernDojoApi = {};
-(function() {
+(function(root, mod) {
+  if (typeof exports == "object" && typeof module == "object") return mod(exports); // CommonJS
+  if (typeof define == "function" && define.amd) return define(["exports"], mod); // AMD
+  mod(root.DojoApi2TernDef || (root.DojoApi2TernDef = {})); // Plain browser env
+})(this, function(exports) {
   "use strict";
 
-  TernDojoApi.generate = function(dojoApi, options) {
+  exports.generate = function(dojoApi, options) {
     var options = options ? options : {};
     if (!options.baseURL) {
       options.baseURL = "http://dojotoolkit.org/api/?qs=1.6/dojo/"
@@ -407,4 +410,4 @@ var TernDojoApi = {};
     }
   }
 
-})();
+});
