@@ -1,0 +1,19 @@
+<html>
+
+<head>
+<title>Dojo 1.9 2 Tern</title>
+<script type="text/javascript" src="../api/1.9/details.json.js"></script>
+<script type="text/javascript" src="DojoDetails2TernDef.js"></script>
+<script type="text/javascript">
+  function dojo2Tern() {
+    var options = {version: '1.9'};
+    var ternDef = DojoDetails2TernDef.generate(dojoApi, options);
+    document.getElementById('ternDef').value = JSON.stringify(ternDef, null,
+        ' ');
+  }
+</script>
+</head>
+<body onload="dojo2Tern();">
+	<textarea id="ternDef" style="width: 100%; height: 100%" spellcheck="false"></textarea>
+</body>
+</html>

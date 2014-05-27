@@ -6,16 +6,17 @@
   "use strict";
 
   exports.generate = function(dojoApi, options) {
-    var options = options ? options : {};
-    if (!options.baseURL) {
-      options.baseURL = "http://dojotoolkit.org/api/?qs=1.6/dojo/"
-    }
-    var ternDef = {
-      "!name" : "dojotoolkit_1_6"
-    };
-    visitApi(dojoApi, ternDef, options);
-    return ternDef;
-  };
+	    var version = options.version;
+	    var ternDef = {
+	      "!name" : "dojotoolkit_" + getVersion(version)
+	    };
+	    visitApi(dojoApi, ternDef, options);
+	    return ternDef;
+	  };
+	  
+	  function getVersion(version) {
+	    return version.replace(/[.]/g, '_');
+	  }
 
   function visitApi(dojoApi, ternDef, options) {
     for ( var name in dojoApi) {
@@ -98,12 +99,12 @@
     var type = 'fn(';
     if (dojoMethod.parameters) {
       for (var j = 0; j < dojoMethod.parameters.length; j++) {
-        var dojoParameter = dojoMethod.parameters[j], name = dojoParameter.name, optionnal = dojoParameter.optionnal;
+        var dojoParameter = dojoMethod.parameters[j], name = dojoParameter.name, optional = (dojoParameter.usage === 'optional');
         var ternType = getTernType(dojoParameter.type);
         if (j > 0)
           type += ', ';
         type += name;
-        if (optionnal)
+        if (optional)
           type += '?';
         if (ternType) {
           type += ': ';
