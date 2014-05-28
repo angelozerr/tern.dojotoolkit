@@ -6,8 +6,8 @@
 <script type="text/javascript" src="DojoApi2TernDef.js"></script>
 <script type="text/javascript">
   function dojo2Tern() {
-	var options = {version: '1.6'};
-    var ternDef = DojoApi2TernDef.generate(dojoApi, otptions);
+	var options = {};
+    var ternDef = DojoApi2TernDef.generate(dojoApi, options);
     document.getElementById('ternDef').value = JSON.stringify(ternDef, null,
         ' ');
   }
