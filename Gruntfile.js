@@ -3,34 +3,34 @@ module.exports = function(grunt) {
   var fs = require("fs"), path = require("path"), DojoApi2TernDef = require("./generator/DojoApi2TernDef"), DojoDetails2TernDef = require("./generator/DojoDetails2TernDef");
   
   var fnDatas = [];
-  fnDatas["1.6"] = function() {return createData("1_6", true)};
-  fnDatas["1.8"] = function() {return createData("1_8", false)};
-  fnDatas["1.9"] = function() {return createData("1_9", false, true)};
+  fnDatas["1.6"] = function() {return createData("1.6", true)};
+  fnDatas["1.8"] = function() {return createData("1.8", false)};
+  fnDatas["1.9"] = function() {return createData("1.9", false)};
   
   grunt.initConfig({
     'template' : {
-      'generate-tern.dojotoolkit_1_6' : {
+      'generate-tern.dojotoolkit_1.6' : {
         'options' : {
           'data' : fnDatas["1.6"]
         },
         'files' : {
-          'plugin/dojotoolkit_1_6.js' : [ 'generator/dojotoolkit.js.tpl' ]
+          'plugin/dojotoolkit_1.6.js' : [ 'generator/dojotoolkit.js.tpl' ]
         }
       },
-      'generate-tern.dojotoolkit_1_8' : {
+      'generate-tern.dojotoolkit_1.8' : {
         'options' : {
           'data' : fnDatas["1.8"]
         },
         'files' : {
-          'plugin/dojotoolkit_1_8.js' : [ 'generator/dojotoolkit_amd.js.tpl' ]
+          'plugin/dojotoolkit_1.8.js' : [ 'generator/dojotoolkit_amd.js.tpl' ]
         }
       },
-      'generate-tern.dojotoolkit_1_9' : {
+      'generate-tern.dojotoolkit_1.9' : {
         'options' : {
           'data' : fnDatas["1.9"]
         },
         'files' : {
-          'plugin/dojotoolkit_1_9.js' : [ 'generator/dojotoolkit_amd.js.tpl' ]
+          'plugin/dojotoolkit_1.9.js' : [ 'generator/dojotoolkit_amd.js.tpl' ]
         }
       }
     }

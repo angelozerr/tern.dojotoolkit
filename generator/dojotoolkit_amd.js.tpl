@@ -41,11 +41,11 @@
   }
   
   function getInterface(name, data) {
-    var module = infer.cx().definitions["dojotoolkit_<%= version %>"][name];
+    var module = infer.cx().definitions["dojotoolkit"][name];
     if (module) return module;
  
     if (name == "require") return getRequire(data);
-    if (name == "module") return infer.cx().definitions["dojotoolkit_<%= version %>"].module;
+    if (name == "module") return infer.cx().definitions["dojotoolkit"].module;
 
     if (data.options.override && Object.prototype.hasOwnProperty.call(data.options.override, name)) {
       var over = data.options.override[name];

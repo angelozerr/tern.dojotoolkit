@@ -6,9 +6,8 @@
   "use strict";
 
   exports.generate = function(dojoApi, options) {
-	    var version = options.version;
 	    var ternDef = {
-	      "!name" : "dojotoolkit_" + getVersion(version)
+	      "!name" : "dojotoolkit"
 	    };
 	    visitApi(dojoApi, ternDef, options);
 	    return ternDef;

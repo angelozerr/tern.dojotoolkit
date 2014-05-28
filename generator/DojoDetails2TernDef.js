@@ -6,15 +6,14 @@
   "use strict";
 
   exports.generate = function(dojoApi, options) {
-    var version = options.version;
-    var ternDef = createDef(version);
+    var ternDef = createDef();
     visitApi(dojoApi, ternDef["!define"], options);
     return ternDef;
   };
   
-  function createDef(version) {
+  function createDef() {
     return {
-      "!name": "dojotoolkit_" + getVersion(version),
+      "!name": "dojotoolkit",
       "!define": {},
       require: {
         "!type": "fn(configuration?: ?, dependencies?: [string], callback?: fn()) -> !custom:requireDojo",
