@@ -1,7 +1,7 @@
 "use strict";
 
 var fs = require("fs"), path = require("path"), tern = require("tern"), assert = require('assert');
-require("../plugin/dojotoolkit_1_6.js");
+require("../plugin/dojotoolkit_1.6.js");
 
 var projectDir = path.resolve(__dirname, "..");
 var resolve = function(pth) {
