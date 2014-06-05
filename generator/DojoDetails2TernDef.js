@@ -25,10 +25,6 @@
       }
     };
   }
-  
-  function getVersion(version) {
-    return version.replace(/[.]/g, '_');
-  }
 
   function visitApi(dojoApi, ternDef, options) {
     for ( var name in dojoApi) {
@@ -44,7 +40,7 @@
         ternClassOrProto["!proto"] = dojoItem.superclass + ".prototype"
       }
       if (dojoItem.summary) {
-        ternClassOrProto["!doc"] = dojoItem.summary;
+        //ternClassOrProto["!doc"] = dojoItem.summary;
       }
       if (dojoItem.properties) {
         visitProperties(dojoItem, ternItem);
@@ -128,9 +124,12 @@
       for (var j = 0; j < returnTypes.length; j++) {
         var returnType = returnTypes[j];
         if (returnType && returnType.indexOf(' ') == -1) {
-          type += ' -> ';
-          type += getTernType(returnType, null, true);
-          break;
+          var t = getTernType(returnType, null, true);
+          if (t != '?') {
+            type += ' -> ';
+            type += t;
+            break;
+          }
         }
       }
     }
@@ -141,7 +140,7 @@
 
   function getTernType(dojoType, dojoApi, isReturn) {
     if (!dojoType || dojoType.indexOf('-') != -1 || dojoType === '[,'
-        || dojoType === ',') {
+        || dojoType === ',' || dojoType === 'any'|| dojoType === 'instance'|| dojoType === 'null') {
       // ex : attribute-name-string, data-store
       return '?';
     }

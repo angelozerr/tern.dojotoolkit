@@ -77,7 +77,9 @@
       return fn;
     },
     parseType: function(name, top) {
-      if (this.eat("fn(")) {
+      if (this.eat("?")) {
+        return infer.ANull;
+      } else if (this.eat("fn(")) {
         return this.parseFnType(name, top);
       } else if (this.eat("[")) {
         var inner = this.parseType();
@@ -98,8 +100,6 @@
         if (!(base instanceof infer.Obj)) return base;
         if (top && this.forceNew) return new infer.Obj(base);
         return infer.getInstance(base);
-      } else if (this.eat("?")) {
-        return infer.ANull;
       } else {
         return this.fromWord(this.word(/[\w$<>\.!`]/));
       }
