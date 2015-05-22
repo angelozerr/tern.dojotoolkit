@@ -7,7 +7,10 @@ Generates [Tern plugin](http://ternjs.net/doc/manual.html#plugins) for [Dojo Too
 
 ## Demo
 
-You can see demo :
+You can see online demo (CodeMirror is used):
+
+ * with [dojotoolkit_1.6.js](https://github.com/angelozerr/tern.dojotoolkit/blob/master/plugin/dojotoolkit_1.6.js) tern plugin [here](http://codemirror-java.opensagres.eu.cloudbees.net/codemirror-javascript/demo/dojotoolkit_1.6.html).
+ * with [dojotoolkit_1.9.js](https://github.com/angelozerr/tern.dojotoolkit/blob/master/plugin/dojotoolkit_1.9.js) tern plugin [here](http://codemirror-java.opensagres.eu.cloudbees.net/codemirror-javascript/demo/dojotoolkit_1.9.html).
 
  
 ## How it works? 
