@@ -1,4 +1,4 @@
-var util = require("../util");
+var util = require("./util");
 
 // see http://dojotoolkit.org/reference-guide/1.10/dojo/dom.html
 
