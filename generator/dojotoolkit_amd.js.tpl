@@ -152,7 +152,7 @@
   });
 
   
-  tern.registerPlugin("dojotoolkit_<%= version %>", function(server, options) {
+  tern.registerPlugin("dojotoolkit<%= version %>", function(server, options) {
     server._dojotoolkit = {
       interfaces: Object.create(null),
       options: options || {},

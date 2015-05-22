@@ -33,7 +33,7 @@
       if (dojoItem.classlike) {
         ternItem["!type"] = "fn()";
         ternClassOrProto = ternItem["prototype"] = {};
-      } else if (dojoItem.type === 'Function') {
+      } else if (dojoItem.type && dojoItem.type.toLowerCase() === 'function') {
         populateMethod(dojoItem, ternItem);
       }
       if (dojoItem.superclass) {
@@ -46,7 +46,7 @@
         visitProperties(dojoItem, ternItem);
       }      
       if (dojoItem.methods) {
-        visitMethods(dojoItem, ternItem);
+        visitMethods(dojoItem, ternItem, name);
       }
     }
   }
@@ -84,7 +84,7 @@
     }
   }
 
-  function visitMethods(dojoItem, ternItem) {
+  function visitMethods(dojoItem, ternItem, name) {
     for (var i = 0; i < dojoItem.methods.length; i++) {
       var dojoMethod = dojoItem.methods[i];
       if (dojoMethod.name && !dojoMethod["private"]) {
@@ -96,39 +96,42 @@
         } else {
           ternItem[dojoMethod.name] = ternMethod;
         }
-        populateMethod(dojoMethod, ternMethod);
+        populateMethod(dojoMethod, ternMethod, name);
       }
     }
   }
   
-  function populateMethod(dojoMethod, ternMethod) {
-    var type = 'fn(';
-    if (dojoMethod.parameters) {
-      for (var j = 0; j < dojoMethod.parameters.length; j++) {
-        var dojoParameter = dojoMethod.parameters[j], name = dojoParameter.name, optional = (dojoParameter.usage === 'optional');
-        var ternType = getTernType(dojoParameter.type);
-        if (j > 0)
-          type += ', ';
-        type += name;
-        if (optional)
-          type += '?';
-        if (ternType) {
-          type += ': ';
-          type += ternType;
+  function populateMethod(dojoMethod, ternMethod, moduleName) {
+    var type = getExtendedType(moduleName, dojoMethod.name);
+    if (!type) {
+      type = 'fn(';
+      if (dojoMethod.parameters) {
+        for (var j = 0; j < dojoMethod.parameters.length; j++) {
+          var dojoParameter = dojoMethod.parameters[j], name = dojoParameter.name, optional = (dojoParameter.usage === 'optional');
+          var ternType = dojoParameter.type ? getTernTypes(dojoParameter.type.split("|")) : getTernTypes(dojoParameter.types);
+          if (j > 0)
+            type += ', ';
+          type += name;
+          if (optional)
+            type += '?';
+          if (ternType) {
+            type += ': ';
+            type += ternType;
+          }
         }
       }
-    }
-    type += ')';
-    var returnTypes = dojoMethod["returnTypes"];
-    if (returnTypes) {
-      for (var j = 0; j < returnTypes.length; j++) {
-        var returnType = returnTypes[j];
-        if (returnType && returnType.indexOf(' ') == -1) {
-          var t = getTernType(returnType, null, true);
-          if (t != '?') {
-            type += ' -> ';
-            type += t;
-            break;
+      type += ')';
+      var returnTypes = dojoMethod["returnTypes"];
+      if (returnTypes) {
+        for (var j = 0; j < returnTypes.length; j++) {
+          var returnType = returnTypes[j];
+          if (returnType && returnType.indexOf(' ') == -1) {
+            var t = getTernType(returnType, null, true);
+            if (t != '?') {
+              type += ' -> ';
+              type += t;
+              break;
+            }
           }
         }
       }
@@ -138,8 +141,24 @@
       ternMethod["!doc"] = dojoMethod.summary;
   }
 
+  function getTernTypes(dojoTypes, dojoApi, isReturn) {
+    if (!dojoTypes || dojoTypes.length == 0) return null;
+    var type = "";
+    for (var i = 0; i < dojoTypes.length; i++) {
+      if (i > 0) type += "|";
+      type += getTernType(dojoTypes[i], dojoApi);
+    }
+    return type;
+  }
+  
   function getTernType(dojoType, dojoApi, isReturn) {
-    if (!dojoType || dojoType.indexOf('-') != -1 || dojoType === '[,'
+    if (dojoType) {
+      dojoType = dojoType.trim();
+      if (endsWith(dojoType, "\"") || endsWith(dojoType, "?") || endsWith(dojoType, "*") || (!startsWith(dojoType, "function") && endsWith(dojoType, ")"))) 
+        dojoType = dojoType.substring(0, dojoType.length -1);
+      if (startsWith(dojoType, "\"") || startsWith(dojoType, "(")) dojoType = dojoType.substring(1, dojoType.length);
+    }
+    if (!dojoType || dojoType.indexOf('-') != -1 || dojoType.indexOf(' ') != -1 || dojoType === '[,'
         || dojoType === ',' || dojoType === 'any'|| dojoType === 'instance'|| dojoType === 'null') {
       // ex : attribute-name-string, data-store
       return '?';
@@ -152,6 +171,8 @@
     } else if (dojoType.toLowerCase() === 'object' || dojoType.toLowerCase() === 'undefined') {
       return '?';
     }else {
+      if (dojoType == 'function')  return "fn()";
+      if (startsWith(dojoType, 'function')) return "fn()"; //dojoType.replace('function', 'fn'); 
       // ex : String||Object
       var index = dojoType.indexOf('|');
       if (index > 0) {
@@ -171,9 +192,6 @@
             index = dojoType.indexOf('/');
             if (index > 0) {
               dojoType = dojoType.substring(0, index);
-            } else if (startsWith(dojoType, 'function')) {
-              // ex :function(items)
-              return dojoType.replace('function', 'fn');
             } else if (startsWith(dojoType, '?')) {
               // ex :?String
               dojoType = dojoType.substring(1, dojoType.length);
@@ -197,7 +215,6 @@
         isArray = true;
       }
     }
-    dojoType = dojoType.trim();
     switch (dojoType.toLowerCase()) {
     case 'string':
       return formatType('string', isArray);
@@ -419,5 +436,24 @@
       visitClass(dojoApi, ternDef, ternModule, yuiClass, className);
     }
   }
-
+  
+  var extendedType = {
+      "dojo/dom": {
+        "byId": {
+         "!type": "fn(id: string|+Node, doc?: +Document) -> +Element",      
+        },
+        "setSelectable": {
+          "!type": "fn(node: string|+Node, selectable: bool)"
+         }
+      }
+  }
+  
+  function getExtendedType(moduleName, methodName) {
+    var mod = extendedType[moduleName];
+    if (mod) {
+      var method = mod[methodName];
+      return method ? method["!type"] : null;
+    }
+  }
+  
 });

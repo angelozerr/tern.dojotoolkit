@@ -12,7 +12,10 @@ You can see demo :
  
 ## How it works? 
 
-TODO explain grunt.
+### details.json
+
+Generate details.json from dojo sources by using [js-doc-parse](https://github.com/wkeese/js-doc-parse)
+
 
 ## Structure
 

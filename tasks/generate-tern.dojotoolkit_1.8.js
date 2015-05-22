@@ -17,7 +17,7 @@ templateUtil.addTargetTemplate({
       'data' : getData
     },
     'files' : {
-      'plugin/dojotoolkit_1.8.js' : [ 'generator/dojotoolkit_amd.js.tpl' ]
+      'plugin/dojotoolkit1.8.js' : [ 'generator/dojotoolkit_amd.js.tpl' ]
     }
   }
 });

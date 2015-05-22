@@ -19,11 +19,11 @@
     "url": "https://github.com/angelozerr/tern.dojotoolkit/issues"
   },  
   "scripts": {
-    "test": "node ./test/run.js"
+    "test": "node ./test/all.js"
   },
   "dependencies": {
-    "tern": ">=0.5.0",
-    "acorn": "~0.5.0"
+    "tern": ">=0.10.0",
+    "acorn": ">=1.0.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

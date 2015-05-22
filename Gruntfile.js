@@ -3,6 +3,7 @@ module.exports = function(grunt) {
   require("./tasks/generate-tern.dojotoolkit_1.6");
   require("./tasks/generate-tern.dojotoolkit_1.8");
   require("./tasks/generate-tern.dojotoolkit_1.9");
+  require("./tasks/generate-tern.dojotoolkit_1.10");
   
   var templateUtil = require("./tasks/template-util");
 
