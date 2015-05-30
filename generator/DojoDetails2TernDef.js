@@ -87,7 +87,7 @@
   function visitMethods(dojoItem, ternItem, name) {
     for (var i = 0; i < dojoItem.methods.length; i++) {
       var dojoMethod = dojoItem.methods[i];
-      if (dojoMethod.name && !dojoMethod["private"]) {
+      if (dojoMethod.name && !dojoMethod["private"] && dojoMethod.name != "constructor") {
         var ternMethod = {};
         if (dojoMethod.scope === 'prototype') {
           if (!ternItem.prototype)
